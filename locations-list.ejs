@@ -1,0 +1,65 @@
+<html><head>
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <script src="/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  </head>
+  	<body>
+		<div class="container">
+			<div class="page-header">
+			    <h1>List all the locations around you: </small></h1>
+			</div>
+		<!-- Pricing Tables With Rows - START -->
+			<div class="container pricing-table-container">
+			<% for(var i=0; i < locations.length; i++) { %>
+			    <div class="row">
+			      <div class="col-md-8 col-md-offset-2">
+			        <div class="panel panel-success">
+			          <div class="panel-heading">
+			            <div class="row">
+			              <div class="col-sm-8 col-md-8">
+			                <p><strong><%= locations[i].name %></strong></p>
+			                <div>Ratting: <%=locations[i].rating %></div>
+			              </div>
+			              <div class="col-sm-4 col-md-4">
+			                <button class="btn btn-success pull-right" type="submit">Get Details</button>
+			              </div>
+			            </div>
+			          </div>
+			          <div class="panel-body">
+			            <div class="row">
+			              <div class="col-sm-3 col-md-3 price_border">
+			                <img src="<%= locations[i].image%>" alt="<%= locations[i].name %>"></img>
+			              </div>
+			              <div class="col-sm-7 col-md-7">
+			                <%= locations[i].address %>
+			                <div>Distance: <%=locations[i].distance %></div>
+			              </div>
+			              <div class="col-sm-2 col-md-2 qrdiv">
+			                <div id="qrcode2">
+			                	<% for(var j=0; j < locations[i].facilities.length; j++) { %>
+			                		<label> <%= locations[i].facilities[j] %> </label>
+			                	<% } %>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+			            <div>
+			            	<p>Opening Schedule </p>
+			                <% for(var j=0; j < locations[i].openingTimes.length; j++) { %>
+			                		<label> <%= locations[i].openingTimes[j].days %> Open: <%= !locations[i].openingTimes[j].closed %> <label> <%= locations[i].openingTimes[j].opening %> <% if(locations[i].openingTimes[j].closing) {%> to <%} %> <%= locations[i].openingTimes[j].closing %></label>
+			                <% } %>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			    
+				<% } %>
+			  </div>
+		<!-- Pricing Tables With Rows - END -->
+		</div>
+	</body>
+</html>
